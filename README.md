@@ -42,11 +42,15 @@ optional arguments:
 
 
 
-## Example
+## Examples
 
     python main.py --run_keras --keras_backend theano
 
 This will run a keras benchmark with theano backend.
+
+    python main.py --run_tensorflow --data_format NHWC --use_XLA
+
+This will run a pure tensorflow benchmark with `NHWC` image ordering and using XLA compiler as shown in [https://www.tensorflow.org/performance/xla/jit](Using JIT compilation)
 
 
 ## Notes
