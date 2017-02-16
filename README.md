@@ -11,7 +11,7 @@ We tried to get the most out of each framework but some optimizations may have b
 | Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|  
 | Keras (Theano backend) | 241.478 ms|
 
-<a name="foottime">1</a>: Mean time for 100 (forward + backward + weight updates) on a VGG16 network with mini batch size of 16
+<a name="foottime">1</a>: Mean time for 100 (forward + backward + weight update) trials on a VGG16 network with mini batch size of 16. The timer is started right before the first trial and stopped right after the last trial. The reported time is obtained by dividing this interval by the number of trials.
 
 <a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
 
