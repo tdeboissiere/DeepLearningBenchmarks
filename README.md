@@ -37,6 +37,9 @@ optional arguments:
     --run_keras           Run keras benchmarks
     --batch_size BATCH_SIZE Batch size (default=16)
     --n_trials N_TRIALS   Number of full iterations (forward + backward + update) (default=100)
+    --use_XLA   Whether to use XLA compiler
+    --data_format DATA_FORMAT Tensorflow image format
+
 
 
 ## Example
