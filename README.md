@@ -2,7 +2,7 @@
 
 Deep learning benchmarks largely inspired by [https://raw.githubusercontent.com/aizvorski/vgg-benchmarks](vgg-benchmarks).
 
-We tried to get the most out of each framework but some optimizations may have been overlooked. Fixes and contributions welcome !
+We tried to get the most out of each framework (GPU util is at 99% for all scripts) but some optimizations may have been overlooked. Fixes and contributions welcome !
 
 ## Maxwell Titan X results
 
@@ -10,6 +10,10 @@ We tried to get the most out of each framework but some optimizations may have b
 |:---|:---|
 | Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|  
 | Keras (Theano backend) | 241.478 ms|
+|Tensorflow NHWC no XLA| 365.122 ms|
+|Tensorflow NHWC with XLA| 300.424 ms|
+|Tensorflow NCHW no XLA| 298.478 ms|
+|Tensorflow NCHW with XLA| 294.063 ms|
 
 <a name="foottime">1</a>: Mean time for 100 (forward + backward + weight update) trials on a VGG16 network with mini batch size of 16. The timer is started right before the first trial and stopped right after the last trial. The reported time is obtained by dividing this interval by the number of trials.
 
@@ -44,6 +48,6 @@ This will run a keras benchmark with theano backend.
 
 ## Notes
 
-If running a **tensorflow benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "tf", "epsilon": 1e-07, "floatx": "float32", "backend": "tensorflow" }`
+If running a **keras tensorflow benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "tf", "epsilon": 1e-07, "floatx": "float32", "backend": "tensorflow" }`
 
-If running a **theano benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "th", "epsilon": 1e-07, "floatx": "float32", "backend": "theano" }`
+If running a **keras theano benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "th", "epsilon": 1e-07, "floatx": "float32", "backend": "theano" }`
