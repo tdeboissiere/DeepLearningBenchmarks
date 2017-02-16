@@ -41,9 +41,11 @@ optional arguments:
 
     python main.py --run_keras --keras_backend theano
 
+This will run a keras benchmark with theano backend.
+
 
 ## Notes
 
-If running a tensorflow benchmark, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "tf", "epsilon": 1e-07, "floatx": "float32", "backend": "tensorflow" }`
+If running a **tensorflow benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "tf", "epsilon": 1e-07, "floatx": "float32", "backend": "tensorflow" }`
 
-If running a theano benchmark, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "th", "epsilon": 1e-07, "floatx": "float32", "backend": "theano" }`
+If running a **theano benchmark**, make sure the `~/.keras/keras.json` file is set to `{ "image_dim_ordering": "th", "epsilon": 1e-07, "floatx": "float32", "backend": "theano" }`
