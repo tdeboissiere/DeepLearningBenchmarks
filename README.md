@@ -1,6 +1,6 @@
 # Deep Learning benchmarks
 
-Deep learning benchmarks largely inspired by [https://raw.githubusercontent.com/aizvorski/vgg-benchmarks](vgg-benchmarks).
+Deep learning benchmarks largely inspired by [vgg-benchmarks](https://raw.githubusercontent.com/aizvorski/vgg-benchmarks).
 
 We tried to get the most out of each framework (GPU util is at 99% for all scripts) but some optimizations may have been overlooked. Fixes and contributions welcome !
 
@@ -50,7 +50,7 @@ This will run a keras benchmark with theano backend.
 
     python main.py --run_tensorflow --data_format NHWC --use_XLA
 
-This will run a pure tensorflow benchmark with `NHWC` image ordering and using XLA compiler as shown in [https://www.tensorflow.org/performance/xla/jit](Using JIT compilation)
+This will run a pure tensorflow benchmark with `NHWC` image ordering and using XLA compiler as shown in [Using JIT compilation](https://www.tensorflow.org/performance/xla/jit)
 
 
 ## Notes
