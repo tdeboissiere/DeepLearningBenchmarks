@@ -9,7 +9,7 @@ We tried to get the most out of each framework but some optimizations may have b
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
 | Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|  
-| Keras (Theano backend) | 241.478 ms ms |
+| Keras (Theano backend) | 241.478 ms|
 
 <a name="foottime">1</a>: Mean time for 100 (forward + backward + weight updates) on a VGG16 network with mini batch size of 16
 
