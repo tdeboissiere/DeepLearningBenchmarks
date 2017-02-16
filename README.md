@@ -31,10 +31,8 @@ We tried to get the most out of each framework but some optimizations may have b
 optional arguments:
 
     --run_keras           Run keras benchmarks
-    --batch_size BATCH_SIZE
-                        Batch size
-    --n_trials N_TRIALS   Number of full iterations (forward + backward +
-                        update)
+    --batch_size BATCH_SIZE Batch size (default=16)
+    --n_trials N_TRIALS   Number of full iterations (forward + backward + update) (default=100)
 
 
 ## Example
