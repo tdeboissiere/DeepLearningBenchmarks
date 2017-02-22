@@ -8,20 +8,16 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-| Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|  
+| Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|
 | Keras (Theano backend) | 241.478 ms|
 |Tensorflow NHWC no XLA| 365.122 ms|
 |Tensorflow NHWC with XLA| 300.424 ms|
 |Tensorflow NCHW no XLA| 298.478 ms|
 |Tensorflow NCHW with XLA| 294.063 ms|
 
-<a name="foottime">1</a>: Mean time for 100 (forward + backward + weight update) trials on a VGG16 network with mini batch size of 16. The timer is started right before the first trial and stopped right after the last trial. The reported time is obtained by dividing this interval by the number of trials.
-
-<a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
-
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-|Tensorflow NHWC + BN no XLA| 493.235 ms|
+|Tensorflow NHWC + BN <sup>[3](#footBN)</sup> no XLA| 493.235 ms|
 |Tensorflow NHWC + BN + XLA| 341.702 ms|
 |Tensorflow NHWC + fused BN no XLA| 426.669 ms|
 |Tensorflow NHWC + fused BN + XLA| 450.777 ms|
@@ -29,6 +25,12 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 |Tensorflow NCHW + BN + XLA| 326.325 ms|
 |Tensorflow NCHW + fused BN no XLA| 322.396 ms|
 |Tensorflow NCHW + fused BN + XLA| 345.121 ms|
+
+<a name="foottime">1</a>: Mean time for 100 (forward + backward + weight update) trials on a VGG16 network with mini batch size of 16. The timer is started right before the first trial and stopped right after the last trial. The reported time is obtained by dividing this interval by the number of trials.
+
+<a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
+
+<a name="footBN">3</a>: Batch normalization layer applied after convolution layers
 
 ### System specs
 
