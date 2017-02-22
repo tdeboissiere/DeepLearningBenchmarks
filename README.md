@@ -34,11 +34,18 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 optional arguments:
 
-    --run_keras           Run keras benchmarks
-    --batch_size BATCH_SIZE Batch size (default=16)
-    --n_trials N_TRIALS   Number of full iterations (forward + backward + update) (default=100)
-    --use_XLA   Whether to use XLA compiler
-    --data_format DATA_FORMAT Tensorflow image format
+      --run_keras           Run keras benchmark
+      --run_tensorflow      Run pure tensorflow benchmark
+      --batch_size BATCH_SIZE
+                            Batch size
+      --n_trials N_TRIALS   Number of full iterations (forward + backward +
+                            update)
+      --use_XLA             Whether to use XLA compiler
+      --data_format DATA_FORMAT
+                            Tensorflow image format
+      --use_bn              Use batch normalization (tf benchmark)
+      --use_fused           Use fused batch normalization (tf benchmark)
+
 
 
 
