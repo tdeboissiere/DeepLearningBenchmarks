@@ -19,6 +19,17 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 <a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
 
+| Framework | Time <sup>[1](#foottime)</sup>|
+|:---|:---|
+|Tensorflow NHWC + BN no XLA| 493.235 ms|
+|Tensorflow NHWC + BN + XLA| 341.702 ms|
+|Tensorflow NHWC + fused BN no XLA| 426.669 ms|
+|Tensorflow NHWC + fused BN + XLA| 450.777 ms|
+|Tensorflow NCHW + BN no XLA| 3642.178 ms|
+|Tensorflow NCHW + BN + XLA| 326.325 ms|
+|Tensorflow NCHW + fused BN no XLA| 322.396 ms|
+|Tensorflow NCHW + fused BN + XLA| 345.121 ms|
+
 ### System specs
 
 - Ubuntu 14.04
