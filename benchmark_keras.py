@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from time import time
 import keras
@@ -7,6 +6,7 @@ from keras.models import Model
 from keras.layers import Flatten, Dense, Input
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
+import utils
 
 
 def run_VGG16(batch_size=16, n_trials=100):
@@ -83,8 +83,7 @@ def run_VGG16(batch_size=16, n_trials=100):
         import theano as backend
 
     # Print summary
-    print(os.path.basename(__file__))
-    print("Keras version: %s" % keras.__version__)
-    print("Keras backend: %s" % K.backend())
-    print("Backend version: %s" % backend.__version__)
-    print("Mean Time per update: %7.3f ms." % (1000. * (t1 - t0) / n_trials))
+    utils.print_module("Keras version: %s" % keras.__version__)
+    utils.print_module("Keras backend: %s" % K.backend())
+    utils.print_module("Backend version: %s" % backend.__version__)
+    utils.print_result("%7.3f ms." % (1000. * (t1 - t0) / n_trials))

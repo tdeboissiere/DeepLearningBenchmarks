@@ -2,6 +2,7 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
+import utils
 
 
 def conv2d(x, n_in, n_out, k, s, p='SAME', bias=True, data_format="NCHW", scope=None):
@@ -36,9 +37,11 @@ def linear(x, n_in, n_out, bias=True, scope=None):
 
 class Vgg16Model():
     """ VGG16 model adapted from https://github.com/machrisaa/tensorflow-vgg"""
-    def __init__(self, data_format="NCHW"):
+    def __init__(self, data_format="NCHW", use_bn=False, use_fused=False):
         self.image_mean = np.array([103.939, 116.779, 123.68])
         self.data_format = data_format
+        self.use_bn = use_bn
+        self.use_fused = use_fused
         if self.data_format == "NCHW":
             self.pooling_order = [1,1,2,2]
         elif self.data_format == "NHWC":
@@ -47,6 +50,8 @@ class Vgg16Model():
     def _vgg_conv_relu(self, x, n_in, n_out, scope):
         with tf.variable_scope(scope):
             conv = conv2d(x, n_in, n_out, 3, 1, p='SAME', data_format=self.data_format)
+            if self.use_bn:
+                conv = tf.contrib.layers.batch_norm(conv, data_format=self.data_format, fused=self.use_fused)
             relu = tf.nn.relu(conv)
         return relu
 
@@ -100,7 +105,7 @@ class Vgg16Model():
             return prob
 
 
-def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False):
+def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False, use_bn=False, use_fused=False):
     """Run VGG16 experiments in pure tensorflow
 
     Args:
@@ -108,6 +113,8 @@ def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False):
         n_trials: number of forward + backward + weight update trials
         data_format: image dimension ordering (default: {"NHWC"})
         use_XLA: if True, use XLA compiler (default: {False})
+        use_bn: if True, use BatchNorm in conv layers (default: {False})
+        use_XLA: if True, use Fused BatchNorm in conv layers (default: {False})
     """
 
     with tf.Graph().as_default(), tf.device('/gpu:0'):
@@ -122,7 +129,7 @@ def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False):
         # Initialize target
         labels = tf.one_hot(np.arange(batch_size), on_value=1.0, off_value=0.0, depth=1000)
 
-        vgg16 = Vgg16Model(data_format)
+        vgg16 = Vgg16Model(data_format=data_format, use_bn=use_bn, use_fused=use_fused)
         predictions = vgg16(train_inputs, scope='Vgg16')
 
         # Loss function
@@ -156,6 +163,5 @@ def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False):
             t1 = time.time()
 
     # Print summary
-    print(os.path.basename(__file__))
-    print("tensorflow version: %s" % tf.__version__)
-    print("Mean Time per update: %7.3f ms." % (1000. * (t1 - t0) / n_trials))
+    utils.print_module("tensorflow version: %s" % tf.__version__)
+    utils.print_result("%7.3f ms." % (1000. * (t1 - t0) / n_trials))

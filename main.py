@@ -1,4 +1,11 @@
 import argparse
+import utils
+import os
+
+# Disable Tensorflow's INFO and WARNING messages
+# See http://stackoverflow.com/questions/35911252
+if 'TF_CPP_MIN_LOG_LEVEL' not in os.environ:
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 if __name__ == "__main__":
 
@@ -11,6 +18,8 @@ if __name__ == "__main__":
                         help="Number of full iterations (forward + backward + update)")
     parser.add_argument('--use_XLA', action="store_true", help="Whether to use XLA compiler")
     parser.add_argument('--data_format', default="NHWC", type=str, help="Tensorflow image format")
+    parser.add_argument('--use_bn', action="store_true",help="Use batch normalization (tf benchmark)")
+    parser.add_argument('--use_fused', action="store_true",help="Use fused batch normalization (tf benchmark)")
 
     args = parser.parse_args()
 
@@ -18,12 +27,18 @@ if __name__ == "__main__":
 
     if args.run_keras:
         import benchmark_keras
+        utils.print_module("Running %s..." % benchmark_keras.__name__)
+        utils.print_dict(args.__dict__)
         benchmark_keras.run_VGG16(args.batch_size,
                                   args.n_trials)
 
     if args.run_tensorflow:
         import benchmark_tensorflow
+        utils.print_module("Running %s..." % benchmark_tensorflow.__name__)
+        utils.print_dict(args.__dict__)
         benchmark_tensorflow.run_VGG16(args.batch_size,
                                        args.n_trials,
                                        args.data_format,
-                                       args.use_XLA)
+                                       args.use_XLA,
+                                       args.use_bn,
+                                       args.use_fused)
