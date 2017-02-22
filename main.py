@@ -20,6 +20,7 @@ if __name__ == "__main__":
     parser.add_argument('--data_format', default="NHWC", type=str, help="Tensorflow image format")
     parser.add_argument('--use_bn', action="store_true",help="Use batch normalization (tf benchmark)")
     parser.add_argument('--use_fused', action="store_true",help="Use fused batch normalization (tf benchmark)")
+    parser.add_argument('--bn_mode', default=2, type=int, help="keras batch norm mode")
 
     args = parser.parse_args()
 
@@ -30,7 +31,9 @@ if __name__ == "__main__":
         utils.print_module("Running %s..." % benchmark_keras.__name__)
         utils.print_dict(args.__dict__)
         benchmark_keras.run_VGG16(args.batch_size,
-                                  args.n_trials)
+                                  args.n_trials,
+                                  args.use_bn,
+                                  args.bn_mode)
 
     if args.run_tensorflow:
         import benchmark_tensorflow

@@ -8,8 +8,8 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-| Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|
 | Keras (Theano backend) | 241.478 ms|
+| Keras (TensorFlow backend) | 362.206 ms <sup>[2](#kerasnote)</sup>|
 |Tensorflow NHWC no XLA| 365.122 ms|
 |Tensorflow NHWC with XLA| 300.424 ms|
 |Tensorflow NCHW no XLA| 298.478 ms|
@@ -17,7 +17,11 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-|Tensorflow NHWC + BN <sup>[3](#footBN)</sup> no XLA| 493.235 ms|
+| Keras (Theano backend) BN <sup>[3](#footBN)</sup> mode 0| 347.546 ms|
+| Keras (Theano backend) BN mode 2 <sup>[4](#footBNmode)</sup>| 269.074 ms|
+| Keras (TensorFlow backend) mode 0 | 560.938 ms|
+| Keras (TensorFlow backend) mode 2 | 504.966 ms|
+|Tensorflow NHWC + BN no XLA| 493.235 ms|
 |Tensorflow NHWC + BN + XLA| 341.702 ms|
 |Tensorflow NHWC + fused BN no XLA| 395.963 ms|
 |Tensorflow NHWC + fused BN + XLA| 450.777 ms|
@@ -31,6 +35,8 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 <a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
 
 <a name="footBN">3</a>: Batch normalization layer applied after convolution layers
+
+<a name="footBNmode">4</a>: Mode 0 = use per-batch statistics to normalize the data, and during testing use running averages computed during the training phase. Mode 2 = use per-batch statistics to normalize the data during training and testing.
 
 ### System specs
 
