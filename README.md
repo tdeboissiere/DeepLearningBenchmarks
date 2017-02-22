@@ -6,6 +6,8 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 ## Maxwell Titan X results
 
+### Standard VGG16 benchmark
+
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
 | Keras (Theano backend) | 241.478 ms|
@@ -15,10 +17,12 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 |Tensorflow NCHW no XLA| 298.478 ms|
 |Tensorflow NCHW with XLA| 294.063 ms|
 
+### VGG16 + Batch Normalization (BN) benchmark
+
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-| Keras (Theano backend) BN <sup>[3](#footBN)</sup> mode 0| 347.546 ms|
-| Keras (Theano backend) BN mode 2 <sup>[4](#footBNmode)</sup>| 269.074 ms|
+| Keras (Theano backend) BN mode 0 <sup>[3](#footBNmode)</sup>| 347.546 ms|
+| Keras (Theano backend) BN mode 2 | 269.074 ms|
 | Keras (TensorFlow backend) mode 0 | 560.938 ms|
 | Keras (TensorFlow backend) mode 2 | 504.966 ms|
 |Tensorflow NHWC + BN no XLA| 493.235 ms|
@@ -34,9 +38,7 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 <a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
 
-<a name="footBN">3</a>: Batch normalization layer applied after convolution layers
-
-<a name="footBNmode">4</a>: Mode 0 = use per-batch statistics to normalize the data, and during testing use running averages computed during the training phase. Mode 2 = use per-batch statistics to normalize the data during training and testing.
+<a name="footBNmode">3</a>: Mode 0 = use per-batch statistics to normalize the data, and during testing use running averages computed during the training phase. Mode 2 = use per-batch statistics to normalize the data during training and testing.
 
 ### System specs
 
