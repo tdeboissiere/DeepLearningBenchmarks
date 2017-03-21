@@ -21,10 +21,8 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 | Framework | Time <sup>[1](#foottime)</sup>|
 |:---|:---|
-| Keras (Theano backend) BN mode 0 <sup>[3](#footBNmode)</sup>| 347.546 ms|
-| Keras (Theano backend) BN mode 2 | 269.074 ms|
+| Keras (Theano backend) + BN| 347.546 ms|
 | Keras (TensorFlow backend) mode 0 | 560.938 ms|
-| Keras (TensorFlow backend) mode 2 | 504.966 ms|
 |Tensorflow NHWC + BN no XLA| 493.235 ms|
 |Tensorflow NHWC + BN + XLA| 341.702 ms|
 |Tensorflow NHWC + fused BN no XLA| 395.963 ms|
@@ -38,8 +36,6 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 
 <a name="kerasnote">2</a>: Note that at the moment, keras uses traditional NHWC tensorflow ordering
 
-<a name="footBNmode">3</a>: Mode 0 = use per-batch statistics to normalize the data, and during testing use running averages computed during the training phase. Mode 2 = use per-batch statistics to normalize the data during training and testing.
-
 ### System specs
 
 - Ubuntu 14.04
@@ -47,7 +43,7 @@ We tried to get the most out of each framework (GPU util is at 99% for all scrip
 - cuDNN 5.1.10
 - theano '0.9.0beta1.dev-173eef98360c23d7418bad3a36f5fb938724f05f' (cuda backend)
 - tensorflow 1.0.0 (compiled from source with CUDA 8.0 cuDNN 5.1.10 and XLA JIT)
-- Keras 1.2.2
+- Keras 2.0.1
 
 ## Usage
 

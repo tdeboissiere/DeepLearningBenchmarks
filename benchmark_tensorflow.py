@@ -37,6 +37,7 @@ def linear(x, n_in, n_out, bias=True, scope=None):
 
 class Vgg16Model():
     """ VGG16 model adapted from https://github.com/machrisaa/tensorflow-vgg"""
+
     def __init__(self, data_format="NCHW", use_bn=False, use_fused=False):
         self.image_mean = np.array([103.939, 116.779, 123.68])
         self.data_format = data_format
@@ -159,6 +160,7 @@ def run_VGG16(batch_size, n_trials, data_format="NHWC", use_XLA=False, use_bn=Fa
 
             t0 = time.time()
             for i in range(n_trials):
+                t = time.time()
                 sess.run([apply_gradient_op])
             t1 = time.time()
 
