@@ -1,5 +1,7 @@
 # Deep Learning benchmarks
 
+TO DO: Update corrected results with keras 2 (maybe pytorch as well)
+
 Deep learning benchmarks largely inspired by [vgg-benchmarks](https://github.com/aizvorski/vgg-benchmarks).
 
 We tried to get the most out of each framework (GPU util is at 99% for all scripts) but some optimizations may have been overlooked. Fixes and contributions welcome !
